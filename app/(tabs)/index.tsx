@@ -1,24 +1,7 @@
-import { signOut } from "firebase/auth";
-import { useState } from "react";
 import { View } from "react-native";
-import { Button, Text } from "react-native-paper";
-import { auth } from "../../config/firebase";
+import { Text } from "react-native-paper";
 
 export default function Index() {
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const logout = async () => {
-        setError(null);
-        setLoading(true);
-        try {
-            await signOut(auth);
-        } catch (err) {
-          console.error(err)
-        }
-        
-    };
 
   return (
     <View
@@ -29,7 +12,6 @@ export default function Index() {
       }}
     >
       <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Button onPress={logout}> Log Out </Button>
     </View>
   );
 }
