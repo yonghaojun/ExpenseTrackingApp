@@ -1,9 +1,10 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 
 export default function AuthScreen() {
 
@@ -59,6 +60,19 @@ export default function AuthScreen() {
         setLoading(true);
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            // Create initial user document in Firestore with the same UID as Auth
+            try {
+                const uid = userCredential.user.uid;
+                await setDoc(doc(db, "users", uid), {
+                    username: "",
+                    email: userCredential.user.email || email,
+                    avatarUrl: null,
+                    defaultCurrency: "MYR",
+                    createdAt: serverTimestamp(),
+                });
+            } catch (docErr) {
+                console.warn("Failed to create user document:", docErr);
+            }
         } catch (e) {
             setError(getFriendlyError(e));
         } finally {

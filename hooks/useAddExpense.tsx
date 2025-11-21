@@ -2,32 +2,18 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../config/firebase";
 import { useAuth } from "../context/AuthContext";
+import { Expense } from "../types/database.types";
 
-export type ExpenseSplit = {
-    userId: string;
-    amountOwed: number;
-    paidStatus: "paid" | "pending" | string;
-};
 
-export type AddExpenseInput = {
-    description: string;
-    amount: number;
-    currency: string; // e.g. 'MYR'
-    category: string;
-    date?: Date; // optional, if omitted we'll set to now
-    receiptImageUrl?: string | null;
-    groupId?: string | null;
-    splits?: ExpenseSplit[]; // optional splits array
-};
 
-export default function useAddExpense() {
+export const useAddExpense = () => {
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const expenseCollectionRef = collection(db, "expenses");
 
-    const addExpense = async (payload: AddExpenseInput) => {
+    const addExpense = async (payload: Expense) => {
         setError(null);
 
         if (!user) {
@@ -35,10 +21,10 @@ export default function useAddExpense() {
             throw new Error("User not authenticated");
         }
 
-        const { description, amount, category, currency, date, receiptImageUrl, groupId, splits } = payload;
+        const { description, amount, category, currency, receiptImageUrl, groupId, splits } = payload;
 
         // Basic validation
-        if (!description || !amount || !category || !currency) {
+        if (!description || amount == null || !category || !currency) {
             setError("Missing required fields: description, amount, category, currency");
             throw new Error("Missing required fields");
         }
@@ -60,7 +46,6 @@ export default function useAddExpense() {
                 amount,
                 currency,
                 category,
-                date: date ? date.toISOString() : new Date().toISOString(),
                 creatorUserId: user.uid,
                 receiptImageUrl: receiptImageUrl || null,
                 groupId: groupId || null,
