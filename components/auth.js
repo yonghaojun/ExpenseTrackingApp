@@ -29,6 +29,8 @@ export const Auth = () => {
                 return 'This email is already in use. Try signing in.';
             case 'auth/weak-password':
                 return 'Password is too weak. Use at least 6 characters.';
+            case 'auth/invalid-credential':
+                return 'Invalid credentials. Try again.';
             default:
                 // fallback to the message or code
                 return typeof e === 'string' ? e : (e?.message || code);
