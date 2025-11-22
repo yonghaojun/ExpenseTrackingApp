@@ -251,7 +251,10 @@ export default function AddExpenseScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: "#fff" },
+    container: { 
+        flex: 1, 
+        backgroundColor: "#fff", 
+        alignItems: "center", },
     header: {
         height: 64,
         flexDirection: "row",
@@ -309,8 +312,7 @@ const styles = StyleSheet.create({
     scanText: { color: "#666" },
     saveContainer: { alignItems: 'center', marginTop: 16 },
     saveButton: { 
-        marginHorizontal: 20,
-        width: '80%',
+        paddingHorizontal: 100,
         backgroundColor: '#4B9089',
      },
     card: {
@@ -326,6 +328,7 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         // Android shadow
         elevation: 4,
+        
     },
 
     topSemiWrap: {

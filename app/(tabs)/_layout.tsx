@@ -18,6 +18,7 @@ export default function TabsLayout() {
           shadowOpacity: 0.05,
           shadowRadius: 8,
           elevation: 8,
+          width: '140%', // number of tabs x 20% (so only the first 5 main tabs show up on the screen)
         },
         tabBarIconStyle: {
           justifyContent: 'center',
@@ -46,6 +47,7 @@ export default function TabsLayout() {
         name="addExpense"
         options={{
           tabBarButton: (props) => (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <TouchableOpacity
               {...(props as any)}
               style={styles.fabContainer}
@@ -54,6 +56,7 @@ export default function TabsLayout() {
                 <MaterialIcons name="add" size={30} color="#fff" />
               </View>
             </TouchableOpacity>
+            </View>
           ),
         }}
       />
@@ -74,13 +77,28 @@ export default function TabsLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="group/[id]"
+        options={{
+          tabBarButton: () => null
+        }}
+      />
+
+      <Tabs.Screen
+        name="group/[id]/add-member"
+        options={{
+          tabBarButton: () => null
+        }}
+      />
+
     </Tabs>
   );
 }
 
 const styles = StyleSheet.create({
   fabContainer: {
-    top: -30,
+    top: -20,
     justifyContent: 'center',
     alignItems: 'center',
     width: 74,

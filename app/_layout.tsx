@@ -78,6 +78,22 @@ function RootLayoutNav() {
           ) as any,
         }}
       />
+      <Stack.Screen
+        name="createGroup"
+        options={{
+          headerTitle: "",
+          headerBackTitle: '',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.back()}
+              accessibilityLabel="Back"
+              hitSlop={{ top: 12, left: 12, bottom: 12, right: 12 }}
+            >
+              <Text style={{ fontSize: 15 }}> {back} </Text>
+            </TouchableOpacity>
+          ) as any,
+        }}
+      />
     </Stack>
   );
 }

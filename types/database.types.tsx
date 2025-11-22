@@ -13,3 +13,9 @@ export interface Expense {
     groupId?: string | null;
     splits?: ExpenseSplit[];
 }
+
+export interface Group {
+    name: string;
+    createdByUserId: string;
+    memberIds: string[];
+}

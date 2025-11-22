@@ -184,6 +184,9 @@ export default function CurrencySelectScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={{
+        width: "95%", alignSelf: "center" 
+        }}>
       <TextInput
         placeholder="Search currency (code or name)"
         value={query}
@@ -204,13 +207,14 @@ export default function CurrencySelectScreen() {
           </Pressable>
         )}
       />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, backgroundColor: '#fff' },
-  search: { marginBottom: 12 },
+  search: { marginBottom: 12,  },
   row: { paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#eee' },
   code: { fontWeight: '600' },
   name: { color: '#666' },

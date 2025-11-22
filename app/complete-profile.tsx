@@ -93,7 +93,7 @@ export default function CompleteProfileScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { textAlign: 'center', marginBottom: 12, fontSize: 35 },
+  title: { textAlign: 'center', marginBottom: 12, fontSize: 35, color: "#4B9089" },
   helper: { textAlign: 'center', color: '#666', marginBottom: 20 },
   input: { marginBottom: 16 },
 });
